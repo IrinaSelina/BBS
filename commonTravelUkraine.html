@@ -2,9 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <title>DMS</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Travel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
       rel="stylesheet"
       href="https://bbs.back-office.ua/imkd/assets/css/widget-commons.css"
@@ -57,6 +57,7 @@
       var contextUrl = "https://bbs.back-office.ua/imkd";
     </script>
   </head>
+
   <body
     oncontextmenu="return false"
     oncopy="return false;"
@@ -103,29 +104,59 @@
       </div>
     </header>
     <div class="wrapper">
-      <div class="element is_logged">
-        <a href="commonTravelAbroad.html">
-          <img src="static/vendor/images/earth.svg" style="width: 80px" />
-        </a>
-        <h2 style="text-align: center">
-          <a href="commonTravelAbroad.html" style="color: #75bf42"
-            >ТУРИСТИЧНЕ СТРАХУВАННЯ ДЛЯ ВИЇЗДУ ЗАКОРДОН</a
-          >
-        </h2>
-      </div>
-      <div class="element is_logged">
-        <a href="commonTravelUkraine.html">
-          <img src="static/vendor/images/earth.svg" style="width: 80px" />
-        </a>
-        <h2 style="text-align: center">
-          <a href="commonTravelUkraine.html" style="color: #75bf42"
-            >ТУРИСТИЧНЕ СТРАХУВАННЯ ДЛЯ ПОДОРОЖІ УКРАЇНОЮ</a
-          >
-        </h2>
-      </div>
+      <div id="bodyContainer" style="margin-top: 20px"></div>
+      <script>
+        var bodyContainerId = "bodyContainer";
+        var successPaymentUrl =
+          location.href.substr(0, location.href.lastIndexOf("/")) +
+          "/order-list.html";
+        var errorPaymentUrl =
+          location.href.substr(0, location.href.lastIndexOf("/")) +
+          "/order-list.html";
+        var productCode = "mpp_inostranets";
+        var options = {
+          locale: "uk",
+          palette: palette,
+          successPaymentUrl: successPaymentUrl,
+          errorPaymentUrl: errorPaymentUrl,
+          captchaSiteKey: "6Lc9oAcUAAAAAHNtIZVgdA5MorIFAuDzlYhwD5sT",
+          createOrderSuccess: function (number, needManagerConfirmation) {
+            var uri = new URI();
+            var pathName = location.pathname.substr(
+              0,
+              location.pathname.lastIndexOf("/")
+            );
+            uri
+              .pathname(pathName + "/order-list.html")
+              .hash("?order=" + number);
+            window.location.href = uri;
+          },
+
+          createOrderError: function (e) {
+            alert("В ході збереження договору сталася помилка");
+          },
+
+          createContractSuccess: function (id) {
+            location.pathname =
+              location.pathname.substr(0, location.pathname.lastIndexOf("/")) +
+              "/shoppingCart.html";
+          },
+          createContractError: function (e) {
+            alert("В ході збереження договору сталася помилка");
+          },
+          authSuccess: onlineShopAuth,
+        };
+
+        IO.Widgets.makeOrder(
+          productCode,
+          document.getElementById(bodyContainerId),
+          options
+        );
+      </script>
+
+      <script>
+        onlineShopAuth();
+      </script>
     </div>
-    <script>
-      onlineShopAuth();
-    </script>
   </body>
 </html>
