@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://bbs.back-office.ua/imkd/assets/css/widget-commons.css" />
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="static/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="https://bbs.back-office.ua/imkd/assets/js/core/WidgetLoader.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&amp;render=explicit" async="async" defer="defer"></script>
+    <script>
+    function onlineShopAuth() {
+        IO.Auth.check({
+            success: function(object) {
+                $(".is_un_logged").hide();
+                $(".is_logged").show();
+            },
+            fail: function() {
+                $(".is_logged").hide();
+                $(".is_un_logged").show();
+            }
+        });
+    }
+
+    function onlineShopLogout() {
+        IO.Auth.logout({
+            success: function() {
+                $(".is_un_logged").show();
+                $(".is_logged").hide();
+                redirectTo("/index.html")
+            }
+        });
+    }
+
+
+    function redirectTo(page) {
+        location.pathname = location.pathname.substr(0, location.pathname.lastIndexOf("/")) + page;
+    }
+    var palette = {
+        main: '#75bf42',
+        secondary: '#f68620',
+        background: '#ffffff'
+    };
+
+    var contextUrl = 'https://bbs.back-office.ua/imkd';
+    </script>
+</head>
+
+<body oncontextmenu="return false" oncopy="return false;" oncontextmenu="return false" onselectstart="return false;">
+    <header class="header">
+        <div class="nav-bar" id="nav-bar-one">
+            <nav></nav>
+             <nav>
+               <h3>
+			<div class="is_un_logged">
+				<a href="authorization.html">Вхід</a>
+				<span style="color: #75bf42;"> | </span>
+				<a href="registration.html">Реєстрація</a>
+			</div>
+			<div class="is_logged">
+		                <a class="is_logged" href="index.html#" style="display: none;">Особистий кабінет</a>
+				<span style="color: #75bf42;"> | </span>
+	                	<a class="is_logged" href="index.html#" onclick="onlineShopLogout()" style="display: none;">Вихід</a>
+			</div>
+		</h3>
+            </nav>
+        </div>
+    </header>
+    <header class="header white">
+        <div class="nav-bar" id="nav-bar-two">
+            <nav>
+                <a href="index.html"><img style="margin-top: 20px" src="static/vendor/images/logo_ru.png" alt=""></a>
+            </nav>
+        </div>
+    </header>
+    <div class="wrapper">
+        <div id="bodyContainer" style="margin-top:20px"></div>
+        <script>
+        var options = {
+            palette: palette,
+        };
+        var element = document.getElementById("bodyContainer");
+        IO.Widgets.profile(element, options);
+        </script>
+    </div>
+    <script>
+    onlineShopAuth();
+    </script>
+</body>
+
+</html>
