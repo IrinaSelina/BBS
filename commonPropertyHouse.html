@@ -111,15 +111,10 @@
         var errorPaymentUrl =
           location.href.substr(0, location.href.lastIndexOf("/")) +
           "/order-list.html";
+        var productCode = "KvE_100";
         var options = {
           captchaSiteKey: "6Lc9oAcUAAAAAHNtIZVgdA5MorIFAuDzlYhwD5sT",
-
-          authSuccess: onlineShopAuth,
-          createContractSuccess: function (id) {
-            location.pathname =
-              location.pathname.substr(0, location.pathname.lastIndexOf("/")) +
-              "/shoppingCart.html";
-          },
+          productCode: productCode,
           successPaymentUrl: successPaymentUrl,
           errorPaymentUrl: errorPaymentUrl,
           createOrderSuccess: function (number, needManagerConfirmation) {
@@ -133,13 +128,20 @@
               .hash("?order=" + number);
             window.location.href = uri;
           },
-          onDraftCreate: function () {
-            /** Действие при создании желания*/
-          },
+
           createOrderError: function (e) {
             alert("В ході збереження договору сталася помилка");
           },
-          productCode: "KvE_100",
+
+          createContractSuccess: function (id) {
+            location.pathname =
+              location.pathname.substr(0, location.pathname.lastIndexOf("/")) +
+              "/shoppingCart.html";
+          },
+          createContractError: function (e) {
+            alert("В ході збереження договору сталася помилка");
+          },
+          authSuccess: onlineShopAuth,
         };
         IO.Widgets.boxBuying(
           document.getElementById("boxProductContainer"),
