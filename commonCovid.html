@@ -107,12 +107,18 @@
       <div id="bodyContainer"></div>
       <script>
         var representCode = "represend_Covid";
+        var successPaymentUrl =
+          location.href.substr(0, location.href.lastIndexOf("/")) +
+          "/order-list.html";
+        var errorPaymentUrl =
+          location.href.substr(0, location.href.lastIndexOf("/")) +
+          "/order-list.html";
         var options = {
           representCode: representCode,
           locale: "uk",
           palette: palette,
-          successPaymentUrl: "bbs.ua/dopolnitelnoe-pokrytie-k-avtograzhdanke",
-          errorPaymentUrl: "bbs.ua/dopolnitelnoe-pokrytie-k-avtograzhdanke",
+          successPaymentUrl: successPaymentUrl,
+          errorPaymentUrl: errorPaymentUrl,
           createOrderSuccess: function (orderNumber, needManagerConfirmation) {
             /** Действия при успешном создании заказа */
             IO.Auth.check({
