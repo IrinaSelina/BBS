@@ -373,6 +373,19 @@
         > div
         > div
         > div
+        > div
+        > div
+        > div:nth-child(1)
+        > hr {
+        height: 0 !important;
+        visibility: hidden;
+      }
+      #bodyContainer
+        > span
+        > span
+        > div
+        > div
+        > div
         > div:nth-child(1)
         > div:nth-child(2)
         > div
@@ -527,6 +540,17 @@
         > span
         > span
         > div
+        > div
+        > div
+        > div
+        > div
+        > div
+        > div:nth-child(2)
+        > div
+        > hr,
+      #bodyContainer
+        > span
+        > span
         > div
         > div
         > div
@@ -794,7 +818,9 @@
         > div:nth-child(3) {
         align-items: flex-end;
       }
-      #bodyContainer > span > span > div > div > div > div:nth-child(1) > div {
+      #bodyContainer > span > span > div > div > div > div:nth-child(1) > div,
+      #bodyContainer > span > span > div > div > div > div:nth-child(2) > div,
+      #bodyContainer > span > span > div > div > div > div:nth-child(3) > div {
         height: unset !important;
         justify-items: center !important;
       }
@@ -975,15 +1001,21 @@
         > div
         > div
         > div
-        > div:nth-child(2)
+        > div
         > div
         > div:nth-child(3) {
         align-self: end !important;
       }
+      #bodyContainer > span > span > div > div > div > div:nth-child(1),
       #bodyContainer > span > span > div > div > div > div:nth-child(2),
-      #bodyContainer > span > span > div > div > div > div:nth-child(2) {
+      #bodyContainer > span > span > div > div > div > div:nth-child(3) {
         height: unset !important;
+        align-items: unset !important;
+        /* padding-bottom: 0px !important; */
       }
+      /* #bodyContainer > span > span > div > div > div:nth-child(3) {
+        padding-bottom: 0px !important;
+      } */
       .page-id-14030
         #bodyContainer
         > span
