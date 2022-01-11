@@ -1,0 +1,80 @@
+@media (min-width: 1025px) and (max-width: 1305px) {
+}
+.ha-tabs > .ha-tabs__nav > .ha-tab__title--desktop {
+  border: none;
+}
+@media (max-width: 767px) {
+}
+select {
+  padding: 0;
+}
+#bodyContainer
+  > span
+  > span
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div:nth-child(1)
+  > span {
+  color: #54565a !important;
+}
+#bodyContainer > span > span > div > div > span > div {
+  background: transparent !important;
+}
+#bodyContainer > span > span > div > div > span > div {
+  box-shadow: none !important;
+}
+#bodyContainer
+  > span
+  > span
+  > div
+  > div
+  > span
+  > div
+  > div
+  > div
+  > div
+  > span
+  > div:nth-child(2)
+  > div
+  > div
+  > div
+  > div
+  > div:nth-child(1)
+  > div
+  > div {
+  opacity: 0.7 !important;
+}
+#bodyContainer
+  > span
+  > span
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div:nth-child(2)
+  > div
+  > hr,
+  #bodyContainer
+  > span
+  > span
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div:nth-child(1)
+  > hr
+   {
+  height: 0 !important;
+  visibility: hidden;
+}
+#bodyContainer > span > span > div > div > div > div > div > div:nth-child(1) {
+  background-color: transparent !important;
+}
+body {
+  margin: 0;
+}

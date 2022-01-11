@@ -1,0 +1,94 @@
+@font-face {
+    font-family: eicons;
+    src: url(https://bbs.ua/wp-content/plugins/elementor/assets/lib/eicons/fonts/eicons.eot?5.10.0);
+    src: url(https://bbs.ua/wp-content/plugins/elementor/assets/lib/eicons/fonts/eicons.eot?5.10.0#iefix)
+        format("embedded-opentype"),
+      url(https://bbs.ua/wp-content/plugins/elementor/assets/lib/eicons/fonts/eicons.woff2?5.10.0)
+        format("woff2"),
+      url(https://bbs.ua/wp-content/plugins/elementor/assets/lib/eicons/fonts/eicons.woff?5.10.0)
+        format("woff"),
+      url(https://bbs.ua/wp-content/plugins/elementor/assets/lib/eicons/fonts/eicons.ttf?5.10.0)
+        format("truetype"),
+      url(https://bbs.ua/wp-content/plugins/elementor/assets/lib/eicons/fonts/eicons.svg?5.10.0#eicon)
+        format("svg");
+    font-weight: 400;
+    font-style: normal;
+  }
+  select {
+    padding: 0;
+  }
+  #bodyContainer
+    > span
+    > span
+    > div
+    > div
+    > div
+    > div
+    > div
+    > div:nth-child(1)
+    > span {
+    color: #54565a !important;
+  }
+  #bodyContainer
+  > span
+  > span
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div:nth-child(1)
+  > hr,
+  #bodyContainer
+  > span
+  > span
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div:nth-child(2)
+  > div
+  > hr
+   {
+  height: 0 !important;
+  visibility: hidden;
+}
+  body {
+    margin: 0;
+  }
+ #bodyContainer
+    > span
+    > span
+    > div
+    > div
+    > div
+    > div
+    > div
+    > div:nth-child(3) {
+    align-items: flex-end;
+  }
+  #bodyContainer > span > span > div > div > div > div > div {
+    height: unset !important;
+    justify-items: center !important;
+  }
+  #bodyContainer > span > span > div > div > div > div {
+    align-items: unset !important;
+    height: unset !important;
+  }
+  #bodyContainer
+    > span
+    > span
+    > div
+    > div
+    > div
+    > div
+    > div
+    > div
+    > div
+    > span
+    > ul
+    > li
+    > span {
+    background-color: unset !important;
+  }

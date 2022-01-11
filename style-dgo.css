@@ -1,0 +1,64 @@
+select {
+  padding: 0;
+}
+#bodyContainer
+  > span
+  > span
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div:nth-child(1)
+  > span {
+  color: #54565a !important;
+}
+#bodyContainer
+  > span
+  > span
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div:nth-child(2)
+  > div
+  > span
+  > p {
+  text-align: center;
+}
+#bodyContainer
+  > span
+  > span
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div:nth-child(1)
+  > hr {
+  height: 0 !important;
+}
+
+#bodyContainer
+  > span
+  > span
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div:nth-child(2)
+  > div
+  > hr {
+  height: 0 !important;
+  visibility: hidden;
+}
+
+body {
+  margin: 0;
+}
