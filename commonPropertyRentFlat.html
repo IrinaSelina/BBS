@@ -11,6 +11,7 @@
     />
     <link rel="stylesheet" href="normalize.css" />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style-flat.css" />
     <script src="static/vendor/jquery/dist/jquery.min.js"></script>
     <script src="https://b-o.bbs.ua/imkd/assets/js/core/WidgetLoader.js"></script>
     <script
@@ -52,6 +53,9 @@
         main: "#75bf42",
         secondary: "#f68620",
         background: "#ffffff",
+        buttonColor: "#74C111",
+        buttonHoverColor: "#F68620",
+        representHeader: "fff",
       };
 
       var contextUrl = "https://b-o.bbs.ua/imkd";
@@ -103,34 +107,56 @@
       </div>
     </header>
     <div class="wrapper">
-      <div class="element is_logged">
-        <a href="commonPropertyFlat.html">
-          <img src="static/vendor/images/home.svg" style="width: 80px" />
-        </a>
-        <h2 style="text-align: center">
-          <a href="commonPropertyFlat.html" style="color: #75bf42">ВЛАСНА КВАРТИРА</a>
-        </h2>
-      </div>
-      <div class="element is_logged">
-        <a href="commonPropertyRentFlat.html">
-          <img src="static/vendor/images/home.svg" style="width: 80px" />
-        </a>
-        <h2 style="text-align: center">
-          <a href="commonPropertyRentFlat.html" style="color: #75bf42">КВАРТИРА В ОРЕНДІ</a>
-        </h2>
-      </div>
-      <div class="element is_logged">
-        <a href="commonPropertyHouse.html">
-          <img src="static/vendor/images/home.svg" style="width: 80px" />
-        </a>
-        <h2 style="text-align: center">
-          <a href="commonPropertyHouse.html" style="color: #75bf42">ОСЕЛЯ</a>
-        </h2>
-      </div>
-        <script>
-          onlineShopAuth();
-        </script>
-     
+      <div id="bodyContainer"></div>
+      <script>
+        var successPaymentUrl =
+          location.href.substr(0, location.href.lastIndexOf("/")) +
+          "/order-list.html";
+
+        var errorPaymentUrl =
+          location.href.substr(0, location.href.lastIndexOf("/")) +
+          "/order-list.html";
+        var representCode = "represent_FLAT_RENT";
+        var options = {
+          representCode: representCode,
+          locale: "uk",
+          palette: palette,
+          successPaymentUrl: successPaymentUrl,
+          errorPaymentUrl: errorPaymentUrl,
+          captchaSiteKey: "6Lc9oAcUAAAAAHNtIZVgdA5MorIFAuDzlYhwD5sT",
+          createOrderSuccess: function (number, needManagerConfirmation) {
+            var uri = new URI();
+            var pathName = location.pathname.substr(
+              0,
+              location.pathname.lastIndexOf("/")
+            );
+            uri
+              .pathname(pathName + "/order-list.html")
+              .hash("?order=" + number);
+            window.location.href = uri;
+          },
+
+          createOrderError: function (e) {
+            alert("В ході збереження договору сталася помилка");
+          },
+
+          createContractSuccess: function (id) {
+            location.pathname =
+              location.pathname.substr(0, location.pathname.lastIndexOf("/")) +
+              "/shoppingCart.html";
+          },
+          createContractError: function (e) {
+            alert("В ході збереження договору сталася помилка");
+          },
+          authSuccess: onlineShopAuth,
+        };
+        var element = document.getElementById("bodyContainer");
+        IO.Widgets.represent(element, options);
+      </script>
     </div>
+
+    <script>
+      onlineShopAuth();
+    </script>
   </body>
 </html>
