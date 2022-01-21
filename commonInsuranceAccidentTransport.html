@@ -2,15 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>PRODUCTS</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Property</title>
     <link
       rel="stylesheet"
       href="https://b-o.bbs.ua/imkd/assets/css/widget-commons.css"
     />
     <link rel="stylesheet" href="normalize.css" />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style-flat.css" />
     <script src="static/vendor/jquery/dist/jquery.min.js"></script>
     <script src="https://b-o.bbs.ua/imkd/assets/js/core/WidgetLoader.js"></script>
     <script
@@ -18,6 +19,7 @@
       async="async"
       defer="defer"
     ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.18.9/URI.min.js"></script>
     <script>
       function onlineShopAuth() {
         IO.Auth.check({
@@ -51,6 +53,9 @@
         main: "#75bf42",
         secondary: "#f68620",
         background: "#ffffff",
+        buttonColor: "#74C111",
+        buttonHoverColor: "#F68620",
+        representHeader: "fff",
       };
 
       var contextUrl = "https://b-o.bbs.ua/imkd";
@@ -101,66 +106,53 @@
         </nav>
       </div>
     </header>
-    <div class="wrapper container">
-      <div class="elements">
-        <div class="element is_logged">
-          <a href="commonOsago.html">
-            <img src="static/vendor/images/osago.svg" style="width: 80px" />
-          </a>
-          <h2 style="text-align: center">
-            <a href="commonOsago.html" style="color: #75bf42">ОСЦПВВТЗ</a>
-          </h2>
-        </div>
-        <div class="element is_logged">
-          <a href="commonDgo.html">
-            <img src="static/vendor/images/osago.svg" style="width: 80px" />
-          </a>
-          <h2 style="text-align: center">
-            <a href="commonDgo.html" style="color: #75bf42"
-              >ДОДАТКОВА ВІДПОВІДАЛЬНІСТЬ</a
-            >
-          </h2>
-        </div>
-        <div class="element is_logged">
-          <a href="commonPropertyMain.html">
-            <img src="static/vendor/images/home.svg" style="width: 80px" />
-          </a>
-          <h2 style="text-align: center">
-            <a href="commonPropertyMain.html" style="color: #75bf42"
-              >СТРАХУВАННЯ МАЙНА</a
-            >
-          </h2>
-        </div>
-        <div class="element is_logged">
-          <a href="commonTravel.html">
-            <img src="static/vendor/images/travel.svg" style="width: 80px" />
-          </a>
-          <h2 style="text-align: center">
-            <a href="commonTravel.html" style="color: #75bf42"
-              >ТУРИСТИЧНЕ СТРАХУВАННЯ</a
-            >
-          </h2>
-        </div>
+    <div class="wrapper">
+      <div id="bodyContainer"></div>
+      <script>
+        var successPaymentUrl =
+          location.href.substr(0, location.href.lastIndexOf("/")) +
+          "/order-list.html";
 
-        <div class="element is_logged">
-          <a href="commonCovid.html">
-            <img src="static/vendor/images/covid.svg" style="width: 80px" />
-          </a>
-          <h2 style="text-align: center">
-            <a href="commonCovid.html" style="color: #75bf42">COVID19</a>
-          </h2>
-        </div>
-        <div class="element is_logged">
-          <a href="commonInsuranceAccidentTransport.html">
-            <img src="static/vendor/images/home.svg" style="width: 80px" />
-          </a>
-          <h2 style="text-align: center">
-            <a href="commonInsuranceAccidentTransport.html" style="color: #75bf42"
-              >ДНВТ</a
-            >
-          </h2>
-        </div>
-      </div>
+        var errorPaymentUrl =
+          location.href.substr(0, location.href.lastIndexOf("/")) +
+          "/order-list.html";
+        var representCode = "represent_DNVT";
+        var options = {
+          representCode: representCode,
+          locale: "uk",
+          palette: palette,
+          successPaymentUrl: successPaymentUrl,
+          errorPaymentUrl: errorPaymentUrl,
+          captchaSiteKey: "6Lc9oAcUAAAAAHNtIZVgdA5MorIFAuDzlYhwD5sT",
+          createOrderSuccess: function (number, needManagerConfirmation) {
+            var uri = new URI();
+            var pathName = location.pathname.substr(
+              0,
+              location.pathname.lastIndexOf("/")
+            );
+            uri
+              .pathname(pathName + "/order-list.html")
+              .hash("?order=" + number);
+            window.location.href = uri;
+          },
+
+          createOrderError: function (e) {
+            alert("В ході збереження договору сталася помилка");
+          },
+
+          createContractSuccess: function (id) {
+            location.pathname =
+              location.pathname.substr(0, location.pathname.lastIndexOf("/")) +
+              "/shoppingCart.html";
+          },
+          createContractError: function (e) {
+            alert("В ході збереження договору сталася помилка");
+          },
+          authSuccess: onlineShopAuth,
+        };
+        var element = document.getElementById("bodyContainer");
+        IO.Widgets.represent(element, options);
+      </script>
     </div>
 
     <script>
