@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+  
   <head>
     <meta charset="UTF-8" />
+    <title>OSAGO</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Property</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
       rel="stylesheet"
       href="https://b-o.bbs.ua/imkd/assets/css/widget-commons.css"
     />
     <link rel="stylesheet" href="normalize.css" />
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="style-flat.css" />
     <script src="static/vendor/jquery/dist/jquery.min.js"></script>
     <script src="https://b-o.bbs.ua/imkd/assets/js/core/WidgetLoader.js"></script>
     <script
@@ -53,18 +53,15 @@
         main: "#75bf42",
         secondary: "#f68620",
         background: "#ffffff",
-        buttonColor: "#74C111",
-        buttonHoverColor: "#F68620",
-        representHeader: "fff",
       };
 
       var contextUrl = "https://b-o.bbs.ua/imkd";
     </script>
   </head>
+
   <body
     oncontextmenu="return false"
     oncopy="return false;"
-    
     onselectstart="return false;"
   >
     <header class="header">
@@ -107,56 +104,27 @@
       </div>
     </header>
     <div class="wrapper">
-      <div id="bodyContainer"></div>
+      <div id="bodyContainer" style="margin-top: 20px"></div>
       <script>
-        var successPaymentUrl =
-          location.href.substr(0, location.href.lastIndexOf("/")) +
-          "/order-list.html";
-
-        var errorPaymentUrl =
-          location.href.substr(0, location.href.lastIndexOf("/")) +
-          "/order-list.html";
-        var representCode = "represent_HOME";
-        var options = {
-          representCode: representCode,
-          locale: "uk",
-          palette: palette,
-          successPaymentUrl: successPaymentUrl,
-          errorPaymentUrl: errorPaymentUrl,
-          captchaSiteKey: "6Lc9oAcUAAAAAHNtIZVgdA5MorIFAuDzlYhwD5sT",
-          createOrderSuccess: function (number, needManagerConfirmation) {
-            var uri = new URI();
-            var pathName = location.pathname.substr(
-              0,
-              location.pathname.lastIndexOf("/")
-            );
-            uri
-              .pathname(pathName + "/order-list.html")
-              .hash("?order=" + number);
-            window.location.href = uri;
-          },
-
-          createOrderError: function (e) {
-            alert("В ході збереження договору сталася помилка");
-          },
-
-          createContractSuccess: function (id) {
-            location.pathname =
-              location.pathname.substr(0, location.pathname.lastIndexOf("/")) +
-              "/shoppingCart.html";
-          },
-          createContractError: function (e) {
-            alert("В ході збереження договору сталася помилка");
-          },
-          authSuccess: onlineShopAuth,
-        };
-        var element = document.getElementById("bodyContainer");
-        IO.Widgets.represent(element, options);
+          var options = {
+              captchaSiteKey: "6Lc9oAcUAAAAAHNtIZVgdA5MorIFAuDzlYhwD5sT",
+              authSuccess: function(){},
+              createContractSuccess: function (contractId) { /** Действия при успешном заключении договора (переход на корзину) */ },
+              successPaymentUrl: "!Полный путь к ресурсу",
+              errorPaymentUrl: "!Полный путь к ресурсу",
+              createOrderSuccess: function (orderNumber, needManagerConfirmation) {
+                  /** Действия при успешном создании заказа */
+                  IO.Auth.check({
+                      success: ()=>{/** Действия для залогиненого пользователя (переход на список заказов) */},
+                      fail: ()=>{/** Действия для незалогиненого пользователя (переход на страницу где не требуется авторизация)*/},
+                  });
+              },
+              onDraftCreate: function(){/** Действие при создании желания*/},
+              createOrderError: function (error) { /** Действия при ошибке создания заказа */ },
+              productCode: "weapon"
+          };
+          IO.Widgets.boxBuying(document.getElementById("bodyContainer"), options);
       </script>
-    </div>
-
-    <script>
-      onlineShopAuth();
-    </script>
+      </div>
   </body>
 </html>
